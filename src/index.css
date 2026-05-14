@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: rgba(255, 255, 255, 0.92);
+  background: #02040d;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #02040d;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(103, 232, 249, 0.55) rgba(2, 4, 13, 0.4);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(42, 95, 255, 0.18), transparent 26rem),
+    radial-gradient(circle at 82% 70%, rgba(236, 72, 153, 0.12), transparent 24rem),
+    #02040d;
+  cursor: crosshair;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+body.has-card-hover {
+  cursor: pointer;
+}
+
+.font-display {
+  font-family: "Inter Tight", Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.card-face {
+  width: 250px;
+  height: 158px;
+  display: grid;
+  grid-template-rows: 76px auto auto;
+  gap: 9px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.035)),
+    radial-gradient(circle at 15% 10%, rgba(104, 225, 255, 0.22), transparent 55%);
+  color: white;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 18px 45px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  transform-origin: center;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+  text-align: left;
+}
+
+.card-face.is-hovered {
+  border-color: rgba(154, 239, 255, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    0 0 35px rgba(59, 226, 255, 0.24),
+    0 24px 60px rgba(0, 0, 0, 0.48);
+}
+
+.placeholder-zone {
+  display: grid;
+  place-items: center;
+  min-height: 76px;
+  border: 1px dashed rgba(199, 242, 255, 0.32);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(100, 91, 255, 0.22), rgba(14, 165, 233, 0.11)),
+    rgba(255, 255, 255, 0.035);
+  color: rgba(210, 250, 255, 0.72);
+  overflow: hidden;
+}
+
+.shimmer {
+  position: relative;
+}
+
+.shimmer::after {
+  position: absolute;
+  inset: -35%;
+  content: "";
+  background: linear-gradient(110deg, transparent 34%, rgba(255, 255, 255, 0.18) 48%, transparent 62%);
+  transform: translateX(-62%) rotate(8deg);
+  animation: shimmer 3.8s ease-in-out infinite;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.card-tag {
+  max-width: 170px;
+  overflow: hidden;
+  color: rgba(218, 250, 255, 0.68);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.card-dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+}
+
+.card-title {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes shimmer {
+  0%,
+  42% {
+    transform: translateX(-62%) rotate(8deg);
+  }
+
+  100% {
+    transform: translateX(62%) rotate(8deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .card-face {
+    width: 216px;
+    height: 140px;
+    grid-template-rows: 62px auto auto;
+    border-radius: 18px;
+    padding: 12px;
+  }
+
+  .placeholder-zone {
+    min-height: 62px;
+    border-radius: 13px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+}
