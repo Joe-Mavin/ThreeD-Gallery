@@ -4,6 +4,31 @@ import { UploadCloud } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
 import { AdditiveBlending, Color } from 'three'
 
+function ImageSlot({ card }) {
+  const [failed, setFailed] = useState(false)
+  const showImage = card.image?.src && !failed
+
+  return (
+    <span className={`placeholder-zone ${showImage ? 'has-image' : 'shimmer'}`}>
+      {showImage ? (
+        <img
+          src={card.image.src}
+          width={card.image.width}
+          height={card.image.height}
+          alt=""
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span className="placeholder-copy">
+          <UploadCloud size={21} />
+          <span>{card.image?.width || 1200} x {card.image?.height || 760}</span>
+        </span>
+      )}
+    </span>
+  )
+}
+
 function CardFace({ card, hovered, onClick }) {
   return (
     <Html transform distanceFactor={1.55} position={[0, 0, 0.036]} zIndexRange={[20, 0]} style={{ pointerEvents: 'auto' }}>
@@ -17,9 +42,7 @@ function CardFace({ card, hovered, onClick }) {
         }}
         aria-label={`Open ${card.title}`}
       >
-        <span className="placeholder-zone shimmer">
-          <UploadCloud size={21} />
-        </span>
+        <ImageSlot card={card} />
         <span className="card-meta">
           <span className="card-tag">{card.category}</span>
           <span className="card-dot" style={{ backgroundColor: card.accent, boxShadow: `0 0 18px ${card.accent}` }} />
@@ -41,18 +64,21 @@ function HelixCard({ card, index, total, progress, velocity, isMobile, onCardSel
     const group = groupRef.current
     if (!group) return
 
-    const spacing = isMobile ? 1.7 : 1.9
-    const radius = isMobile ? 2.25 : 3.35
-    const helixTurns = Math.PI * 2.35
+    const spacing = isMobile ? 1.62 : 1.9
+    const radius = isMobile ? 2.05 : 3.2
+    const helixTurns = Math.PI * 5.2
+    const verticalSpan = total * spacing
+    const scrollLift = progress * verticalSpan
     const base = index / total
     const angle = base * Math.PI * 2 + progress * helixTurns + clock.elapsedTime * (0.045 + velocity * 0.08)
-    const z = 4.2 - index * spacing + progress * total * spacing * 0.96
-    const y = Math.sin(clock.elapsedTime * 0.8 + index) * 0.13
+    const verticalLoop = ((index * spacing - scrollLift + verticalSpan * 0.5) % verticalSpan) - verticalSpan * 0.5
+    const y = verticalLoop + Math.sin(clock.elapsedTime * 0.8 + index) * 0.16
+    const z = Math.sin(angle) * (isMobile ? 1.15 : 1.75) - 4.8 + Math.cos(progress * Math.PI * 2 + index) * 0.28
 
     group.position.x += (Math.cos(angle) * radius - group.position.x) * (1 - Math.exp(-delta * 5.4))
-    group.position.y += (Math.sin(angle * 0.72) * 0.85 + y - group.position.y) * (1 - Math.exp(-delta * 4.2))
+    group.position.y += (y - group.position.y) * (1 - Math.exp(-delta * 4.2))
     group.position.z += (z - group.position.z) * (1 - Math.exp(-delta * 4.8))
-    group.rotation.y += (angle + Math.PI - group.rotation.y) * (1 - Math.exp(-delta * 3.5))
+    group.rotation.y += (angle + Math.PI * 0.5 - group.rotation.y) * (1 - Math.exp(-delta * 3.5))
     group.rotation.x = Math.sin(clock.elapsedTime * 0.55 + index) * 0.08
     group.rotation.z = Math.cos(clock.elapsedTime * 0.45 + index * 0.4) * 0.045
     group.scale.lerp({ x: hovered ? 1.12 : 1, y: hovered ? 1.12 : 1, z: hovered ? 1.12 : 1 }, 1 - Math.exp(-delta * 9))
@@ -111,8 +137,9 @@ export default function SpiralCards({ cards, progress, velocity, isMobile, onCar
 
   useFrame((_, delta) => {
     if (!rigRef.current) return
-    const target = progress * Math.PI * 1.2
+    const target = progress * Math.PI * 2.8
     rigRef.current.rotation.y += (target - rigRef.current.rotation.y) * (1 - Math.exp(-delta * (1.8 + velocity * 2.5)))
+    rigRef.current.position.y += (Math.sin(progress * Math.PI * 2) * 0.24 - rigRef.current.position.y) * (1 - Math.exp(-delta * 2.4))
   })
 
   return (

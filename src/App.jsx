@@ -1,10 +1,34 @@
 import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
-import { Pause, Play, Sparkles, Volume2, X } from 'lucide-react'
+import { Pause, Play, Sparkles, UploadCloud, Volume2, X } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
 import GalleryScene from './components/GalleryScene'
 import { useImmersiveAudio } from './hooks/useImmersiveAudio'
 import { useScrollRig } from './hooks/useScrollRig'
 import { galleryCards } from './data/galleryCards'
+
+function ModalImage({ card }) {
+  const [failed, setFailed] = useState(false)
+  const showImage = card.image?.src && !failed
+
+  return (
+    <div className={`modal-image ${showImage ? 'has-image' : 'shimmer'}`}>
+      {showImage ? (
+        <img
+          src={card.image.src}
+          width={card.image.width}
+          height={card.image.height}
+          alt=""
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span>
+          <UploadCloud size={24} />
+          {card.image?.width || 1200} x {card.image?.height || 760}
+        </span>
+      )}
+    </div>
+  )
+}
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null)
@@ -147,7 +171,7 @@ function App() {
               >
                 <X size={18} />
               </button>
-              <div className="mb-6 h-52 rounded-2xl border border-dashed border-cyan-100/24 bg-[linear-gradient(135deg,rgba(105,64,255,0.26),rgba(34,211,238,0.12),rgba(255,255,255,0.04))] shimmer" />
+              <ModalImage card={selectedCard} />
               <div className="mb-3 flex items-center gap-3">
                 <span className="rounded-full border border-cyan-200/22 bg-cyan-200/10 px-3 py-1 text-xs uppercase tracking-[0.22em] text-cyan-100">
                   {selectedCard.category}

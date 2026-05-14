@@ -4,6 +4,11 @@ export const galleryCards = [
     title: 'Spectral Foundry',
     category: 'Generative',
     accent: '#62f3ff',
+    image: {
+      src: '/gallery/spectral-foundry.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'A living interface study where glass panels react like instruments inside a deep-space product room.',
   },
   {
@@ -11,6 +16,11 @@ export const galleryCards = [
     title: 'Orbital Memory',
     category: 'Archive',
     accent: '#9b8cff',
+    image: {
+      src: '/gallery/orbital-memory.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'Temporal cards drift through the tunnel, revealing layered data fragments with cinematic restraint.',
   },
   {
@@ -18,6 +28,11 @@ export const galleryCards = [
     title: 'Neural Bloom',
     category: 'AI System',
     accent: '#ff70d8',
+    image: {
+      src: '/gallery/neural-bloom.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'Soft model signals pulse through the helix as scroll velocity bends the energy of the scene.',
   },
   {
@@ -25,6 +40,11 @@ export const galleryCards = [
     title: 'Kinetic Prism',
     category: 'Brand Lab',
     accent: '#7cffb2',
+    image: {
+      src: '/gallery/kinetic-prism.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'A premium launch surface for ideas that need depth, motion, tactility, and immediate presence.',
   },
   {
@@ -32,6 +52,11 @@ export const galleryCards = [
     title: 'Dark Current',
     category: 'Sound',
     accent: '#45a3ff',
+    image: {
+      src: '/gallery/dark-current.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'Reactive ambience turns movement into low cinematic pressure without becoming loud or distracting.',
   },
   {
@@ -39,6 +64,11 @@ export const galleryCards = [
     title: 'Signal Vault',
     category: 'Interface',
     accent: '#ffd36b',
+    image: {
+      src: '/gallery/signal-vault.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'A compact command card with luminous edges, precise hierarchy, and a physical glass response.',
   },
   {
@@ -46,6 +76,11 @@ export const galleryCards = [
     title: 'Aether Grid',
     category: 'Spatial',
     accent: '#baffff',
+    image: {
+      src: '/gallery/aether-grid.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'Spatial composition and parallax create the sensation of floating through a curated digital gallery.',
   },
   {
@@ -53,6 +88,11 @@ export const galleryCards = [
     title: 'Luminous Index',
     category: 'Portfolio',
     accent: '#c084fc',
+    image: {
+      src: '/gallery/luminous-index.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'Portfolio modules orbit through depth, ready to be swapped for real campaign and product imagery.',
   },
   {
@@ -60,6 +100,11 @@ export const galleryCards = [
     title: 'Synthetic Dawn',
     category: 'Launch',
     accent: '#ff8a65',
+    image: {
+      src: '/gallery/synthetic-dawn.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'A launch-ready card designed for futuristic startups, studios, and immersive AI product reveals.',
   },
   {
@@ -67,6 +112,11 @@ export const galleryCards = [
     title: 'Quantum Lobby',
     category: 'Experience',
     accent: '#73ffda',
+    image: {
+      src: '/gallery/quantum-lobby.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'An ambient transition space where hover, sound, camera movement, and bloom act as one system.',
   },
   {
@@ -74,6 +124,11 @@ export const galleryCards = [
     title: 'Mirror Stack',
     category: 'Design',
     accent: '#8aa8ff',
+    image: {
+      src: '/gallery/mirror-stack.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'Reflections, fog, and deep black negative space keep the gallery polished instead of cluttered.',
   },
   {
@@ -81,6 +136,11 @@ export const galleryCards = [
     title: 'Halo Protocol',
     category: 'Prototype',
     accent: '#f0fb7f',
+    image: {
+      src: '/gallery/halo-protocol.jpg',
+      width: 1200,
+      height: 760,
+    },
     description: 'A high-end WebGL prototype foundation with modular components and responsive performance settings.',
   },
 ]

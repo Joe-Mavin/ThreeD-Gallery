@@ -10,13 +10,14 @@ export default function CameraController({ progress, velocity, pointer }) {
   useFrame((_, delta) => {
     const px = pointer.x.get()
     const py = pointer.y.get()
-    const depth = progress * -22
-    const sway = Math.sin(progress * Math.PI * 3.2) * 0.58
+    const verticalDrift = Math.sin(progress * Math.PI * 2.8) * 0.75
+    const orbitalSway = Math.sin(progress * Math.PI * 5.2) * 0.9
+    const breathingDepth = Math.cos(progress * Math.PI * 3.6) * 0.55
 
-    targetPosition.set(px * 1.25 + sway, 0.25 + py * -0.55, 8 + depth + velocity * 0.55)
+    targetPosition.set(px * 1.05 + orbitalSway, verticalDrift + py * -0.5, 7.2 + breathingDepth + velocity * 0.55)
     camera.position.lerp(targetPosition, 1 - Math.exp(-delta * 3.3))
 
-    lookTarget.set(px * 0.65, py * -0.36, depth - 4.5)
+    lookTarget.set(px * 0.55, verticalDrift * 0.35 + py * -0.24, -4.9)
     camera.lookAt(lookTarget)
   })
 

@@ -87,7 +87,9 @@ body.has-card-hover {
 .placeholder-zone {
   display: grid;
   place-items: center;
+  width: 100%;
   min-height: 76px;
+  aspect-ratio: 1200 / 760;
   border: 1px dashed rgba(199, 242, 255, 0.32);
   border-radius: 16px;
   background:
@@ -95,6 +97,28 @@ body.has-card-hover {
     rgba(255, 255, 255, 0.035);
   color: rgba(210, 250, 255, 0.72);
   overflow: hidden;
+}
+
+.placeholder-zone.has-image {
+  border-style: solid;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.placeholder-zone img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.placeholder-copy {
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .shimmer {
@@ -145,6 +169,43 @@ body.has-card-hover {
   line-height: 1.05;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.modal-image {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1200 / 760;
+  max-height: 360px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  border: 1px dashed rgba(199, 242, 255, 0.24);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(105, 64, 255, 0.26), rgba(34, 211, 238, 0.12), rgba(255, 255, 255, 0.04)),
+    rgba(255, 255, 255, 0.035);
+  color: rgba(210, 250, 255, 0.72);
+}
+
+.modal-image.has-image {
+  border-style: solid;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.modal-image span {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 @keyframes shimmer {
