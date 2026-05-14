@@ -34,9 +34,9 @@ export function useScrollRig() {
     const tick = () => {
       measure()
       const rig = latest.current
-      rig.progress += (rig.targetProgress - rig.progress) * 0.085
-      rig.velocity += (rig.targetVelocity - rig.velocity) * 0.12
-      rig.targetVelocity *= 0.94
+      rig.progress += (rig.targetProgress - rig.progress) * 0.046
+      rig.velocity += (rig.targetVelocity - rig.velocity) * 0.075
+      rig.targetVelocity *= 0.91
 
       motionProgress.set(rig.progress)
       setState({ progress: rig.progress, velocity: rig.velocity })

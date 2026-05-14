@@ -5,11 +5,11 @@ export const galleryCards = [
     category: 'Generative',
     accent: '#62f3ff',
     image: {
-      src: '/gallery/spectral-foundry.jpg',
+      src: '/gallery/spectral-foundry.png',
       width: 1200,
       height: 760,
     },
-    description: 'A living interface study where glass panels react like instruments inside a deep-space product room.',
+    description: 'A layered portrait frame for mood-heavy photography, arranged like a moving collage in low light.',
   },
   {
     id: 'orbital-memory',
@@ -17,11 +17,11 @@ export const galleryCards = [
     category: 'Archive',
     accent: '#9b8cff',
     image: {
-      src: '/gallery/orbital-memory.jpg',
+      src: '/gallery/orbital-memory.png',
       width: 1200,
       height: 760,
     },
-    description: 'Temporal cards drift through the tunnel, revealing layered data fragments with cinematic restraint.',
+    description: 'Memory fragments drift past each other, giving each image room to feel collected, personal, and tactile.',
   },
   {
     id: 'neural-bloom',
@@ -29,11 +29,11 @@ export const galleryCards = [
     category: 'AI System',
     accent: '#ff70d8',
     image: {
-      src: '/gallery/neural-bloom.jpg',
+      src: '/gallery/neural-bloom.png',
       width: 1200,
       height: 760,
     },
-    description: 'Soft model signals pulse through the helix as scroll velocity bends the energy of the scene.',
+    description: 'Color, shadow, and motion create a gallery wall that feels alive without pulling attention from the photos.',
   },
   {
     id: 'kinetic-prism',
@@ -41,11 +41,11 @@ export const galleryCards = [
     category: 'Brand Lab',
     accent: '#7cffb2',
     image: {
-      src: '/gallery/kinetic-prism.jpg',
+      src: '/gallery/kinetic-prism.png',
       width: 1200,
       height: 760,
     },
-    description: 'A premium launch surface for ideas that need depth, motion, tactility, and immediate presence.',
+    description: 'A bold collage position for hero shots, editorial details, and stills that deserve cinematic depth.',
   },
   {
     id: 'dark-current',
@@ -53,11 +53,11 @@ export const galleryCards = [
     category: 'Sound',
     accent: '#45a3ff',
     image: {
-      src: '/gallery/dark-current.jpg',
+      src: '/gallery/dark-current.png',
       width: 1200,
       height: 760,
     },
-    description: 'Reactive ambience turns movement into low cinematic pressure without becoming loud or distracting.',
+    description: 'Ambient motion supports quiet viewing, letting scroll rhythm feel like moving through a private exhibition.',
   },
   {
     id: 'signal-vault',
@@ -65,11 +65,11 @@ export const galleryCards = [
     category: 'Interface',
     accent: '#ffd36b',
     image: {
-      src: '/gallery/signal-vault.jpg',
+      src: '/gallery/signal-vault.png',
       width: 1200,
       height: 760,
     },
-    description: 'A compact command card with luminous edges, precise hierarchy, and a physical glass response.',
+    description: 'A clean caption frame for featured photos, glowing softly around each image without crowding the composition.',
   },
   {
     id: 'aether-grid',
@@ -77,11 +77,11 @@ export const galleryCards = [
     category: 'Spatial',
     accent: '#baffff',
     image: {
-      src: '/gallery/aether-grid.jpg',
+      src: '/gallery/aether-grid.png',
       width: 1200,
       height: 760,
     },
-    description: 'Spatial composition and parallax create the sensation of floating through a curated digital gallery.',
+    description: 'Parallax spacing turns the collection into a vertical photo collage suspended inside a dark gallery room.',
   },
   {
     id: 'luminous-index',
@@ -89,11 +89,11 @@ export const galleryCards = [
     category: 'Portfolio',
     accent: '#c084fc',
     image: {
-      src: '/gallery/luminous-index.jpg',
+      src: '/gallery/luminous-index.png',
       width: 1200,
       height: 760,
     },
-    description: 'Portfolio modules orbit through depth, ready to be swapped for real campaign and product imagery.',
+    description: 'A portfolio-ready slot for replacing placeholders with your own shoots, edits, covers, and visual stories.',
   },
   {
     id: 'synthetic-dawn',
@@ -101,11 +101,11 @@ export const galleryCards = [
     category: 'Launch',
     accent: '#ff8a65',
     image: {
-      src: '/gallery/synthetic-dawn.jpg',
+      src: '/gallery/synthetic-dawn.png',
       width: 1200,
       height: 760,
     },
-    description: 'A launch-ready card designed for futuristic startups, studios, and immersive AI product reveals.',
+    description: 'Warm highlight space for golden-hour images, travel memories, and striking moments from the collection.',
   },
   {
     id: 'quantum-lobby',
@@ -113,11 +113,11 @@ export const galleryCards = [
     category: 'Experience',
     accent: '#73ffda',
     image: {
-      src: '/gallery/quantum-lobby.jpg',
+      src: '/gallery/quantum-lobby.png',
       width: 1200,
       height: 760,
     },
-    description: 'An ambient transition space where hover, sound, camera movement, and bloom act as one system.',
+    description: 'Hover, audio, and camera movement blend together so opening a photo feels like entering the frame.',
   },
   {
     id: 'mirror-stack',
@@ -125,11 +125,11 @@ export const galleryCards = [
     category: 'Design',
     accent: '#8aa8ff',
     image: {
-      src: '/gallery/mirror-stack.jpg',
+      src: '/gallery/mirror-stack.png',
       width: 1200,
       height: 760,
     },
-    description: 'Reflections, fog, and deep black negative space keep the gallery polished instead of cluttered.',
+    description: 'Reflections and negative space keep the collage premium, focused, and easy to explore at a slower pace.',
   },
   {
     id: 'halo-protocol',
@@ -137,10 +137,10 @@ export const galleryCards = [
     category: 'Prototype',
     accent: '#f0fb7f',
     image: {
-      src: '/gallery/halo-protocol.jpg',
+      src: '/gallery/halo-protocol.png',
       width: 1200,
       height: 760,
     },
-    description: 'A high-end WebGL prototype foundation with modular components and responsive performance settings.',
+    description: 'A final showcase frame for standout imagery, designed to hold attention before the loop continues.',
   },
 ]

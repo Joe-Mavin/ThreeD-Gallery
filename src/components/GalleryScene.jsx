@@ -7,7 +7,7 @@ import CameraController from './CameraController'
 import Particles from './Particles'
 import Atmosphere from './Atmosphere'
 
-export default function GalleryScene({ cards, progress, velocity, pointer, onCardSelect, onCardHover }) {
+export default function GalleryScene({ cards, progress, velocity, focusedCardId, pointer, onCardSelect, onCardHover }) {
   const [quality, setQuality] = useState(1)
   const isMobile = useMemo(() => window.matchMedia('(max-width: 720px)').matches, [])
   const visibleCards = isMobile ? cards.slice(0, 8) : cards
@@ -37,6 +37,7 @@ export default function GalleryScene({ cards, progress, velocity, pointer, onCar
           cards={visibleCards}
           progress={progress}
           velocity={velocity}
+          focusedCardId={focusedCardId}
           isMobile={isMobile}
           onCardSelect={onCardSelect}
           onCardHover={onCardHover}

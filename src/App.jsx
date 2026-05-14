@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
 import { Pause, Play, Sparkles, UploadCloud, Volume2, X } from 'lucide-react'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import GalleryScene from './components/GalleryScene'
 import { useImmersiveAudio } from './hooks/useImmersiveAudio'
 import { useScrollRig } from './hooks/useScrollRig'
@@ -32,6 +32,7 @@ function ModalImage({ card }) {
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null)
+  const [focusedCardId, setFocusedCardId] = useState(null)
   const [audioEnabled, setAudioEnabled] = useState(false)
   const pointerX = useMotionValue(0)
   const pointerY = useMotionValue(0)
@@ -39,6 +40,7 @@ function App() {
   const smoothY = useSpring(pointerY, { stiffness: 90, damping: 24, mass: 0.35 })
   const rig = useScrollRig()
   const cursorRef = useRef(null)
+  const openTimerRef = useRef(null)
   const audio = useImmersiveAudio(audioEnabled, rig.velocity)
 
   const activeMeta = useMemo(() => {
@@ -59,17 +61,37 @@ function App() {
 
   const toggleAudio = async () => {
     const next = !audioEnabled
-    setAudioEnabled(next)
     if (next) {
       await audio.start()
+      setAudioEnabled(true)
     } else {
+      setAudioEnabled(false)
       audio.stop()
     }
   }
 
+  const openCard = (card) => {
+    window.clearTimeout(openTimerRef.current)
+    audio.playHover('select')
+    setFocusedCardId(card.id)
+    openTimerRef.current = window.setTimeout(() => {
+      setSelectedCard(card)
+    }, 460)
+  }
+
+  const closeCard = () => {
+    window.clearTimeout(openTimerRef.current)
+    setSelectedCard(null)
+    setFocusedCardId(null)
+  }
+
+  useEffect(() => {
+    return () => window.clearTimeout(openTimerRef.current)
+  }, [])
+
   return (
     <main
-      className="relative min-h-[620vh] overflow-clip bg-void text-white selection:bg-cyan-300 selection:text-black"
+      className="relative min-h-[980vh] overflow-clip bg-void text-white selection:bg-cyan-300 selection:text-black"
       onPointerMove={handlePointerMove}
     >
       <div className="fixed inset-0 z-0">
@@ -77,11 +99,9 @@ function App() {
           cards={galleryCards}
           progress={rig.progress}
           velocity={rig.velocity}
+          focusedCardId={focusedCardId}
           pointer={{ x: smoothX, y: smoothY }}
-          onCardSelect={(card) => {
-            audio.playHover('select')
-            setSelectedCard(card)
-          }}
+          onCardSelect={openCard}
           onCardHover={() => audio.playHover('hover')}
         />
       </div>
@@ -98,10 +118,10 @@ function App() {
         <div>
           <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.34em] text-cyan-100/70">
             <Sparkles size={14} />
-            <span>Helix Archive</span>
+            <span>Onyango JP</span>
           </div>
           <h1 className="mt-4 max-w-3xl text-balance font-display text-5xl font-semibold leading-[0.92] tracking-normal text-white sm:text-7xl lg:text-8xl">
-            Cinematic AI Gallery
+            Cinematic Photo Gallery
           </h1>
         </div>
 
@@ -130,7 +150,7 @@ function App() {
         <div className="flex items-end justify-between gap-5 lg:min-w-80">
           <div className="w-44">
             <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.24em] text-white/45">
-              <span>Scroll depth</span>
+              <span>Gallery drift</span>
               <span>{Math.round(rig.progress * 100)}%</span>
             </div>
             <div className="h-px overflow-hidden rounded-full bg-white/15">
@@ -139,7 +159,7 @@ function App() {
           </div>
           <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-black/25 px-4 py-3 text-xs text-white/55 backdrop-blur-xl sm:flex">
             <Volume2 size={15} className={audioEnabled ? 'text-cyan-200' : 'text-white/35'} />
-            <span>{audioEnabled ? 'Reactive audio live' : 'Tap audio for ambience'}</span>
+            <span>{audioEnabled ? 'Ambient viewing live' : 'Tap audio for ambience'}</span>
           </div>
         </div>
       </aside>
@@ -153,7 +173,7 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedCard(null)}
+            onClick={closeCard}
           >
             <motion.article
               className="relative w-full max-w-2xl overflow-hidden rounded-[28px] border border-white/16 bg-[#07101c]/84 p-6 shadow-[0_0_90px_rgba(80,130,255,0.28)]"
@@ -166,7 +186,7 @@ function App() {
               <button
                 type="button"
                 className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/8 text-white/75 transition hover:bg-white/14"
-                onClick={() => setSelectedCard(null)}
+                onClick={closeCard}
                 aria-label="Close card details"
               >
                 <X size={18} />

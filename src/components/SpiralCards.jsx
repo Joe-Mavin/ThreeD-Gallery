@@ -53,39 +53,46 @@ function CardFace({ card, hovered, onClick }) {
   )
 }
 
-function HelixCard({ card, index, total, progress, velocity, isMobile, onCardSelect, onCardHover }) {
+function HelixCard({ card, index, total, progress, velocity, focusedCardId, isMobile, onCardSelect, onCardHover }) {
   const groupRef = useRef()
   const materialRef = useRef()
   const [hovered, setHovered] = useState(false)
   const accent = useMemo(() => new Color(card.accent), [card.accent])
+  const isFocused = focusedCardId === card.id
   const selectCard = () => onCardSelect(card)
 
   useFrame(({ clock }, delta) => {
     const group = groupRef.current
     if (!group) return
 
-    const spacing = isMobile ? 1.62 : 1.9
+    const spacing = isMobile ? 1.84 : 2.18
     const radius = isMobile ? 2.05 : 3.2
-    const helixTurns = Math.PI * 5.2
+    const helixTurns = Math.PI * 3.35
     const verticalSpan = total * spacing
-    const scrollLift = progress * verticalSpan
+    const scrollLift = progress * verticalSpan * 0.48
     const base = index / total
     const angle = base * Math.PI * 2 + progress * helixTurns + clock.elapsedTime * (0.045 + velocity * 0.08)
     const verticalLoop = ((index * spacing - scrollLift + verticalSpan * 0.5) % verticalSpan) - verticalSpan * 0.5
     const y = verticalLoop + Math.sin(clock.elapsedTime * 0.8 + index) * 0.16
     const z = Math.sin(angle) * (isMobile ? 1.15 : 1.75) - 4.8 + Math.cos(progress * Math.PI * 2 + index) * 0.28
 
-    group.position.x += (Math.cos(angle) * radius - group.position.x) * (1 - Math.exp(-delta * 5.4))
-    group.position.y += (y - group.position.y) * (1 - Math.exp(-delta * 4.2))
-    group.position.z += (z - group.position.z) * (1 - Math.exp(-delta * 4.8))
-    group.rotation.y += (angle + Math.PI * 0.5 - group.rotation.y) * (1 - Math.exp(-delta * 3.5))
+    const targetX = isFocused ? 0 : Math.cos(angle) * radius
+    const targetY = isFocused ? 0.03 : y
+    const targetZ = isFocused ? 1.75 : z
+    const targetRotationY = isFocused ? 0 : angle + Math.PI * 0.5
+
+    group.position.x += (targetX - group.position.x) * (1 - Math.exp(-delta * (isFocused ? 7.8 : 4.2)))
+    group.position.y += (targetY - group.position.y) * (1 - Math.exp(-delta * (isFocused ? 7.4 : 3.2)))
+    group.position.z += (targetZ - group.position.z) * (1 - Math.exp(-delta * (isFocused ? 8.4 : 3.8)))
+    group.rotation.y += (targetRotationY - group.rotation.y) * (1 - Math.exp(-delta * (isFocused ? 7.2 : 2.8)))
     group.rotation.x = Math.sin(clock.elapsedTime * 0.55 + index) * 0.08
-    group.rotation.z = Math.cos(clock.elapsedTime * 0.45 + index * 0.4) * 0.045
-    group.scale.lerp({ x: hovered ? 1.12 : 1, y: hovered ? 1.12 : 1, z: hovered ? 1.12 : 1 }, 1 - Math.exp(-delta * 9))
+    group.rotation.z = isFocused ? 0 : Math.cos(clock.elapsedTime * 0.45 + index * 0.4) * 0.045
+    const targetScale = isFocused ? 1.46 : hovered ? 1.12 : 1
+    group.scale.lerp({ x: targetScale, y: targetScale, z: targetScale }, 1 - Math.exp(-delta * 9))
 
     if (materialRef.current) {
-      materialRef.current.opacity += ((hovered ? 0.46 : 0.26) - materialRef.current.opacity) * 0.08
-      materialRef.current.emissiveIntensity += ((hovered ? 0.8 : 0.32) - materialRef.current.emissiveIntensity) * 0.08
+      materialRef.current.opacity += ((isFocused ? 0.58 : hovered ? 0.46 : 0.26) - materialRef.current.opacity) * 0.08
+      materialRef.current.emissiveIntensity += ((isFocused ? 1.1 : hovered ? 0.8 : 0.32) - materialRef.current.emissiveIntensity) * 0.08
     }
   })
 
@@ -132,14 +139,14 @@ function HelixCard({ card, index, total, progress, velocity, isMobile, onCardSel
   )
 }
 
-export default function SpiralCards({ cards, progress, velocity, isMobile, onCardSelect, onCardHover }) {
+export default function SpiralCards({ cards, progress, velocity, focusedCardId, isMobile, onCardSelect, onCardHover }) {
   const rigRef = useRef()
 
   useFrame((_, delta) => {
     if (!rigRef.current) return
-    const target = progress * Math.PI * 2.8
-    rigRef.current.rotation.y += (target - rigRef.current.rotation.y) * (1 - Math.exp(-delta * (1.8 + velocity * 2.5)))
-    rigRef.current.position.y += (Math.sin(progress * Math.PI * 2) * 0.24 - rigRef.current.position.y) * (1 - Math.exp(-delta * 2.4))
+    const target = progress * Math.PI * 1.72
+    rigRef.current.rotation.y += (target - rigRef.current.rotation.y) * (1 - Math.exp(-delta * (1.15 + velocity * 1.4)))
+    rigRef.current.position.y += (Math.sin(progress * Math.PI * 2) * 0.16 - rigRef.current.position.y) * (1 - Math.exp(-delta * 1.8))
   })
 
   return (
@@ -152,6 +159,7 @@ export default function SpiralCards({ cards, progress, velocity, isMobile, onCar
           total={cards.length}
           progress={progress}
           velocity={velocity}
+          focusedCardId={focusedCardId}
           isMobile={isMobile}
           onCardSelect={onCardSelect}
           onCardHover={onCardHover}
